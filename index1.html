@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="demo1"></p><br>
+    <p id="demo2"></p><br>
+    <p id="demo3"></p><br>
+    <p id="demo4"></p><br>
+    
+    <label>Paragraph No:</label>
+    <input type="text"size="4" id="num1"><br><br>
+    <label>Range:</label>
+    <input type="text" size="4" id="num22"><br><br>
+    <label>Text:</label>
+    <input type="text" id="num12">&nbsp;&nbsp;&nbsp;
+    <button onclick="add()">Insert</button>
+    <button onclick="sendJSON()">Save</button>
+</body>
+<script>
+    var xhr = new XMLHttpRequest();
+xhr.open("GET", "http://localhost:3000/posts", true);
+xhr.onreadystatechange = function() {
+  if (xhr.readyState == 4) {
+    var responseData = xhr.responseText;
+     var JsonData=JSON.parse(responseData);
+     document.getElementById("demo1").innerHTML=JsonData[0].text
+     document.getElementById("demo2").innerHTML=JsonData[1].text
+     document.getElementById("demo3").innerHTML=JsonData[2].text
+     document.getElementById("demo4").innerHTML=JsonData[3].text
+    }
+}
+xhr.send();
+
+function add(){
+    if(document.getElementById("num1").value==1) {
+var a = document.getElementById("demo1").innerHTML;
+var b = document.getElementById("num12").value;
+var position = document.getElementById("num22").value;
+var output = [a.slice(0, position), b, a.slice(position)].join(' ');
+document.getElementById("demo1").innerHTML=output;
+return true;
+
+}else if(document.getElementById("num1").value==2){
+  var a = document.getElementById("demo2").innerHTML;
+var b = document.getElementById("num12").value;
+var position = document.getElementById("num22").value;
+var output = [a.slice(0, position), b, a.slice(position)].join(' ');
+document.getElementById("demo2").innerHTML=output;
+return true;
+
+}else if(document.getElementById("num1").value==3){
+  var a = document.getElementById("demo3").innerHTML;
+var b = document.getElementById("num12").value;
+var position = document.getElementById("num22").value;
+var output = [a.slice(0, position), b, a.slice(position)].join(' ');
+document.getElementById("demo3").innerHTML=output;
+return true;
+}else if(document.getElementById("num1").value==4){
+  var a = document.getElementById("demo4").innerHTML;
+var b = document.getElementById("num12").value;
+var position = document.getElementById("num22").value;
+var output = [a.slice(0, position), b, a.slice(position)].join(' ');
+document.getElementById("demo4").innerHTML=output;
+return true
+}else{
+  return false;
+}
+}
+function sendJSON(){
+  if(document.getElementById("num1").value==1){
+    var y=parseInt(document.getElementById("num1").value)
+var x = document.getElementById("demo1").innerHTML;
+let xhr = new XMLHttpRequest();
+xhr.open("PUT", "http://localhost:3000/posts/" + y , true);
+xhr.setRequestHeader("Content-Type", "application/json"); 
+xhr.onreadystatechange = function () {
+if (this.readyState === 4 && this.status === 200) { 
+ abc = xhr.responseText;
+      }
+    };
+const data = JSON.stringify({"text":x})
+console.log(data)
+xhr.send(data);
+  }else if(document.getElementById("num1").value==2){
+    var y=parseInt(document.getElementById("num1").value)
+var x = document.getElementById("demo2").innerHTML;
+let xhr = new XMLHttpRequest();
+xhr.open("PUT", "http://localhost:3000/posts/" + y , true);
+xhr.setRequestHeader("Content-Type", "application/json"); 
+xhr.onreadystatechange = function () {
+if (this.readyState === 4 && this.status === 200) {  
+ abc = xhr.responseText;
+      }
+    }; 
+const data = JSON.stringify({"text":x})
+console.log(data)
+xhr.send(data);
+  }else if(document.getElementById("num1").value==3){
+    var y=parseInt(document.getElementById("num1").value)
+var x = document.getElementById("demo3").innerHTML;
+let xhr = new XMLHttpRequest();
+xhr.open("PUT", "http://localhost:3000/posts/" + y , true);
+xhr.setRequestHeader("Content-Type", "application/json"); 
+xhr.onreadystatechange = function () {
+if (this.readyState === 4 && this.status === 200) {  
+ abc = xhr.responseText;
+      }
+    };  
+const data = JSON.stringify({"text":x})
+console.log(data)
+xhr.send(data);
+  }else if(document.getElementById("num1").value==4){
+    var y=parseInt(document.getElementById("num1").value)
+var x = document.getElementById("demo4").innerHTML;
+let xhr = new XMLHttpRequest();
+xhr.open("PUT", "http://localhost:3000/posts/" + y , true);
+xhr.setRequestHeader("Content-Type", "application/json"); 
+xhr.onreadystatechange = function () {
+if (this.readyState === 4 && this.status === 200) {
+ abc = xhr.responseText;
+      }
+    };   
+const data = JSON.stringify({"text":x})
+console.log(data)
+xhr.send(data);
+  }
+}
+</script>
+</html>
+
+
+<!-- /////////db.json code///////
+
+{
+    "posts": [
+      {
+          "id":1,
+        "text": "When ‌you ‌create ‌pictures, ‌charts, ‌or ‌diagrams, ‌they ‌also ‌coordinate ‌with ‌your ‌current ‌document ‌look. ‌You ‌can ‌easily ‌change ‌the ‌formatting ‌of ‌selected ‌text ‌in ‌the ‌document ‌text ‌by ‌choosing ‌a ‌look ‌for ‌the ‌selected ‌text ‌from ‌the ‌Quick ‌Styles ‌gallery ‌on ‌the ‌Home ‌tab."
+      },
+      {
+          "id":2,
+        "text": "You ‌can ‌also ‌format ‌text ‌directly ‌by ‌using ‌the ‌other ‌controls ‌on ‌the ‌Home ‌tab. ‌Most ‌controls ‌offer ‌a ‌choice ‌of ‌using ‌the ‌look ‌from ‌the ‌current ‌theme ‌or ‌using ‌a ‌format ‌that ‌you ‌specify ‌directly."
+      },
+      {
+          "id":3,
+        "text": "To ‌change ‌the ‌overall ‌look ‌of ‌your ‌document, ‌choose ‌new ‌Theme ‌elements ‌on ‌the ‌Page ‌Layout ‌tab. ‌To ‌change ‌the ‌looks ‌available ‌in ‌the ‌Quick ‌Style ‌gallery, ‌use ‌the ‌Change ‌Current ‌Quick ‌Style ‌Set ‌command."
+      },
+      {
+          "id":4,
+        "text": "Both ‌the ‌Themes ‌gallery ‌and ‌the ‌Quick ‌Styles ‌gallery ‌provide ‌reset ‌commands ‌so ‌that ‌you ‌can ‌always ‌restore ‌the ‌look ‌of ‌your ‌document ‌to ‌the ‌original ‌contained ‌in ‌your ‌current ‌template. ‌On ‌the ‌Insert ‌tab, ‌the ‌galleries ‌include ‌items ‌that ‌are ‌designed ‌to ‌coordinate ‌with ‌the ‌overall ‌look ‌of ‌your ‌document."
+      }
+    ]
+  } 
+
+-->
+
+<!-- /////// url http://localhost:3000/posts  ////// -->
+
